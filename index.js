@@ -1,3 +1,3 @@
-modules.exports = {
-  ChromeCtrl: require( "lib/browser/ChromeCtrl" );
+module.exports = {
+  ChromeCtrl: require( "./lib/browser/ChromeCtrl.js" )
 }
