@@ -24,13 +24,6 @@ describe( "ChromeCtrl", function () {
       } )
     } );
 
-    it( 'list MP', async() => {
-      const list = await promiseConnectedCtrl.then( ctrl => ctrl.listMP() );
-      expect( list ).to.deep.equal( [ {
-        name: "test mp"
-      } ] )
-    } )
-
     it( 'send MP', async() => {
       const list1 = await promiseConnectedCtrl.then( ctrl => ctrl.listMP() );
       await promiseConnectedCtrl.then( ctrl => ctrl.sendMP( config.name, "sendMP", "ceci est un test" ) )
@@ -41,6 +34,28 @@ describe( "ChromeCtrl", function () {
     it( 'send MP to an inexistant user must fail', async() => {
         return promiseConnectedCtrl.then( ctrl => ctrl.sendMP( config.name, "sendMPMustFail", "ceci est un test" ) )
         .then(() => expect("no error throw").to.equal(null)).catch( err => expect(err).to.exist);
+    } )
+
+    it( 'remove received MP', async() => {
+      await promiseConnectedCtrl
+        .then( ctrl => {
+          ctrl.sendMP( config.name, "mustBeDelete", "ceci est un test" );
+          return ctrl;
+        } )
+        .then( ctrl => {
+          ctrl.sendMP( config.name, "mustBeKeep", "ceci est un test" );
+          return ctrl;
+        } )
+        .then( ctrl => ctrl.removeReceiveMP("mustBeDelete", config.name) )
+      const list = await promiseConnectedCtrl.then( ctrl => ctrl.listMP() )
+      expect( list.find( mp => mp.name =="mustBeDelete" ) ).to.not.exist;
+      expect( list.find( mp => mp.name =="mustBeKeep" ) ).to.exist;
+    } )
+
+    it( 'remove all received MP', async() => {
+      await promiseConnectedCtrl.then( ctrl => ctrl.removeAllMP( ) )
+      const list = await promiseConnectedCtrl.then( ctrl => ctrl.listMP() )
+      expect( list.length ).to.equal( 0)
     } )
   } )
 } );
