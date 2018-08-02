@@ -4,15 +4,16 @@
   "license": "MIT",
   "private": false,
   "main": "index.js",
-  "repository" :{
-     "type" : "git",
-     "url" : "https://github.com/UtopiaRPG/caretaker.git"
-   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UtopiaRPG/caretaker.git"
+  },
   "scripts": {
     "start": "node server.js",
     "test": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 50000 --exit"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "npm": "^4.3.0",
     "puppeteer": "^1.4.0"
   },
