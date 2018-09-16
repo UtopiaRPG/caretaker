@@ -1,10 +1,10 @@
 {
-  "name":"utopiaBot",
-  "password":"botTest",
   "rolesID":{
     "verify":"282854395094499329"
   },
   "forum":{
-    "link":"http://towndev.kanak.fr/"
+    "link":"http://towndev.kanak.fr/",
+    "account_name":"utopiaBot",
+    "account_password":"botTest"
   }
 }
