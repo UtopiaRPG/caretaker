@@ -50,7 +50,7 @@ describe("ChromeCtrl", function () {
 
 		it('send MP', async () => {
 			const list1 = await promiseConnectedCtrl.then(ctrl => ctrl.listMP(config.forum));
-			await promiseConnectedCtrl.then(ctrl => ctrl.sendMP(config.forum, config.name, "sendMP", "ceci est un test"));
+			await promiseConnectedCtrl.then(ctrl => ctrl.sendMP(config.forum, config.forum.account_name, "sendMP", "ceci est un test"));
 			const list2 = await promiseConnectedCtrl.then(ctrl => ctrl.listMP(config.forum));
 			expect(list1.length + 1).to.equal(list2.length)
 		});
